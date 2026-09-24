@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "BLOOMCAST — 雲で日差しと雨を配って育てる",
+  "short_name": "BLOOMCAST",
+  "description": "空の雲を指で動かして太陽を隠し、長押しで雨を降らせて、画面の下の植物をできるだけ早く実らせる。ほしい日差しと水は朝・昼・夕と育ち具合で変わるので、動く太陽を追いかけて雲を配り直す。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#8ecae6",
+  "theme_color": "#8ecae6",
+  "lang": "ja",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
