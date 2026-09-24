@@ -31,25 +31,103 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <main class="app">
-    <header class="bar">
-      <h1 class="bar__title">BLOOMCAST</h1>
-      <div class="bar__actions">
-        <button class="pill" data-wak="install" hidden>アプリにする</button>
-        <button class="pill" data-wak="share">共有</button>
+  <canvas id="sky" aria-label="空と植物"></canvas>
+  <div id="safe" aria-hidden="true"></div>
+
+  <!-- 遊ぶ画面の上と下 -->
+  <header class="top" id="top" hidden>
+    <button class="icon-btn" id="pauseBtn" aria-label="ポーズ">
+      <svg viewBox="0 0 24 24" width="22" height="22"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+    </button>
+    <div class="top__time" id="time">0:00.0</div>
+    <div class="top__clock">
+      <span id="phase">朝 · 1 日目</span>
+      <div class="daybar" id="daybar"><i></i><i></i><i></i><i></i><b id="dayMark"></b></div>
+    </div>
+  </header>
+  <footer class="bottom" id="bottom" hidden>
+    <div class="grow">
+      <div class="grow__bar" id="growBar">
+        <div class="grow__fill" id="growFill"></div>
+        <span class="grow__mark" style="left:0%"></span><span class="grow__mark" style="left:25%"></span><span class="grow__mark" style="left:50%"></span><span class="grow__mark" style="left:75%"></span><span class="grow__mark" style="left:100%"></span>
       </div>
-    </header>
+      <div class="grow__labels" id="growLabels"></div>
+    </div>
+    <div class="bottom__row">
+      <div class="health" aria-label="元気"><div class="health__fill" id="healthFill"></div></div>
+      <span class="speed" id="speed">はやさ 100%</span>
+    </div>
+  </footer>
+  <div class="toast" id="toast" hidden></div>
 
-    <section class="stage" id="stage">
-      <!-- ここにゲーム本体 -->
-    </section>
+  <!-- タイトル -->
+  <section class="screen title" id="title">
+    <div class="title__head">
+      <h1 class="title__name">BLOOMCAST</h1>
+      <p class="title__sub">雲で日差しと雨を配って育てる</p>
+    </div>
+    <div class="plants" id="plants"></div>
+    <div class="title__row">
+      <button class="btn" id="howBtn">遊び方</button>
+      <button class="btn" id="soundBtn" aria-pressed="true">音 オン</button>
+    </div>
+    <div class="title__foot">
+      <button class="pill" data-wak="install" hidden>アプリにする</button>
+      <button class="pill" data-wak="share">共有</button>
+      <a class="credit" href="/">T.OF... のアプリ</a>
+    </div>
+  </section>
 
-    <footer class="credit">
-      <a href="/">T.OF...</a> のアプリ
-    </footer>
-  </main>
+  <!-- 遊び方（はじめての 3 枚） -->
+  <section class="screen coach" id="coach" hidden>
+    <div class="sheet">
+      <div class="coach__card" data-card="0">
+        <svg class="coach__art" viewBox="0 0 120 64"><circle cx="46" cy="30" r="14" fill="#ffd35c"/><g fill="#fff"><ellipse cx="72" cy="34" rx="30" ry="13"/><circle cx="62" cy="26" r="11"/><circle cx="78" cy="22" r="13"/></g><path d="M86 46 l8 10 l3 -7 z" fill="#1c2a4a"/></svg>
+        <h2>雲を動かして日差しを調える</h2>
+        <p>雲を指で動かすと、太陽にかかったぶんだけ日差しが弱くなります。左のゲージ<svg class="ico" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4.5" fill="#f5b400"/><g stroke="#f5b400" stroke-width="2" stroke-linecap="round"><path d="M10 1.5v2.5M10 16v2.5M1.5 10h2.5M16 10h2.5M4 4l1.7 1.7M14.3 14.3L16 16M4 16l1.7-1.7M14.3 5.7L16 4"/></g></svg>の<b class="g">緑の帯</b>に合わせます。</p>
+      </div>
+      <div class="coach__card" data-card="1" hidden>
+        <svg class="coach__art" viewBox="0 0 120 64"><g fill="#c9d4e2"><ellipse cx="60" cy="22" rx="30" ry="12"/><circle cx="50" cy="15" r="10"/><circle cx="67" cy="12" r="12"/></g><g stroke="#4aa3df" stroke-width="3" stroke-linecap="round"><path d="M44 38v6M56 42v6M68 38v6M80 42v6"/></g><path d="M60 50c-5 0-8 5-8 8h16c0-3-3-8-8-8z" fill="#5a9e3a"/></svg>
+        <h2>雲を長押しすると雨</h2>
+        <p>雲を押したまま少し止めると、押している間だけ雨が降ります。植物の真上で降らせると土がしめります。右のゲージ<svg class="ico" viewBox="0 0 20 20"><path d="M10 2C7 7 4.5 10 4.5 13a5.5 5.5 0 0 0 11 0C15.5 10 13 7 10 2z" fill="#3d9be0"/></svg>の<b class="g">緑の帯</b>に合わせます。指 2 本で別々の雲も動かせます。</p>
+      </div>
+      <div class="coach__card" data-card="2" hidden>
+        <svg class="coach__art" viewBox="0 0 120 64"><path d="M60 60V26" stroke="#4d8f33" stroke-width="4"/><ellipse cx="50" cy="40" rx="10" ry="5" fill="#5fa83f" transform="rotate(-25 50 40)"/><ellipse cx="70" cy="34" rx="10" ry="5" fill="#5fa83f" transform="rotate(25 70 34)"/><circle cx="60" cy="20" r="8" fill="#e5483a"/><path d="M56 13l4 3 4-3" stroke="#3e7d2a" stroke-width="2" fill="none"/></svg>
+        <h2>実がなるまでのタイムを競う</h2>
+        <p>両方が帯に入っているほど早く育ちます。ほしい量は朝・昼・夕・夜と、育ち具合（芽 → 葉 → つぼみ → 花）で変わります。外れすぎると植物が弱り、弱りきると枯れます。</p>
+      </div>
+      <div class="coach__dots" id="coachDots"><i class="on"></i><i></i><i></i></div>
+      <button class="btn btn--main" id="coachNext">次へ</button>
+    </div>
+  </section>
+
+  <!-- ポーズ -->
+  <section class="screen pause" id="pause" hidden>
+    <div class="sheet">
+      <h2>ポーズ</h2>
+      <button class="btn btn--main" id="resumeBtn">再開</button>
+      <button class="btn" id="restartBtn">やり直す</button>
+      <button class="btn" id="quitBtn">タイトルへ</button>
+    </div>
+  </section>
+
+  <!-- 結果 -->
+  <section class="screen result" id="result" hidden>
+    <div class="sheet">
+      <p class="result__kind" id="resKind"></p>
+      <div class="result__main"><span class="result__big" id="resBig"></span><span class="result__stars" id="resStars"></span></div>
+      <p class="result__note" id="resNote"></p>
+      <ol class="result__splits" id="resSplits"></ol>
+      <div class="result__row">
+        <button class="btn btn--main" id="againBtn">もう一度</button>
+        <button class="btn" id="otherBtn">ほかの植物</button>
+        <button class="btn" id="shareBtn">共有</button>
+      </div>
+    </div>
+  </section>
 
   <script src="./webapp-kit/webapp-kit.js"></script>
+  <script src="./js/model.js"></script>
   <script src="./main.js"></script>
 </body>
 </html>
