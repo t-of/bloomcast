@@ -1,1 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#8ecae6"/><text x="256" y="256" dy=".35em" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="280" fill="#eceef3">B</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5da3d9"/>
+    <stop offset="0.55" stop-color="#a9d6ef"/>
+    <stop offset="1" stop-color="#d9f0f9"/>
+  </linearGradient>
+  <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#8cd66e"/>
+    <stop offset="1" stop-color="#3fae5a"/>
+  </linearGradient>
+  <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#ffe17a" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#ffe17a" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="sunBody" cx="0.38" cy="0.32" r="0.75">
+    <stop offset="0" stop-color="#ffe98f"/>
+    <stop offset="1" stop-color="#f5a524"/>
+  </radialGradient>
+  <linearGradient id="drop" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#8fd4f2"/>
+    <stop offset="1" stop-color="#3a8fc7"/>
+  </linearGradient>
+</defs>
+<defs><clipPath id="c"><rect width="512" height="512" rx="112"/></clipPath></defs><g clip-path="url(#c)">
+<rect width="512" height="512" fill="url(#sky)"/>
+<path d="M0 372 Q140 344 256 356 T512 358 L512 512 L0 512 Z" fill="url(#ground)"/>
+
+<!-- 太陽 -->
+<circle cx="200" cy="175" r="78" fill="url(#sunGlow)"/>
+<circle cx="200" cy="175" r="60" fill="url(#sunBody)"/>
+
+<!-- 雲（太陽の右上にかかる） -->
+<ellipse cx="262" cy="208" rx="92" ry="28" fill="#bcdcee"/>
+<circle cx="225" cy="195" r="36" fill="#ffffff"/>
+<circle cx="258" cy="168" r="46" fill="#ffffff"/>
+<circle cx="295" cy="185" r="40" fill="#ffffff"/>
+<ellipse cx="258" cy="198" rx="70" ry="24" fill="#ffffff"/>
+
+<!-- 雨粒 -->
+<g fill="url(#drop)">
+  <ellipse cx="268" cy="238" rx="7" ry="11" transform="rotate(8 268 238)"/>
+  <ellipse cx="273" cy="268" rx="7.5" ry="11.5" transform="rotate(8 273 268)"/>
+  <ellipse cx="278" cy="298" rx="8" ry="12" transform="rotate(8 278 298)"/>
+</g>
+
+<!-- 植物（トマト） -->
+<ellipse cx="256" cy="405" rx="50" ry="13" fill="#6b4a34"/>
+<path d="M256 400 C256 360 256 340 256 315" stroke="#2d8a45" stroke-width="11" stroke-linecap="round" fill="none"/>
+<g fill="#3fae5a">
+  <path d="M256 388 C232 384 216 372 210 358 C230 356 250 366 256 384 Z"/>
+  <path d="M256 388 C280 384 296 372 302 358 C282 356 262 366 256 384 Z"/>
+  <path d="M256 352 C236 348 224 338 220 326 C238 324 254 332 256 348 Z"/>
+  <path d="M256 352 C276 348 288 338 292 326 C274 324 258 332 256 348 Z"/>
+</g>
+<g>
+  <circle cx="234" cy="322" r="16" fill="#e2483d"/>
+  <circle cx="256" cy="300" r="17" fill="#e2483d"/>
+  <circle cx="278" cy="322" r="15" fill="#e2483d"/>
+  <circle cx="228" cy="317" r="4.5" fill="#ff8a7c" opacity="0.85"/>
+  <circle cx="250" cy="295" r="5" fill="#ff8a7c" opacity="0.85"/>
+  <circle cx="272" cy="317" r="4" fill="#ff8a7c" opacity="0.85"/>
+  <path d="M234 306 l-5 -8 l5 3 l0 -6 l5 6 l5 -3 l-5 8 Z" fill="#3fae5a"/>
+  <path d="M256 283 l-5 -8 l5 3 l0 -6 l5 6 l5 -3 l-5 8 Z" fill="#3fae5a"/>
+  <path d="M278 307 l-5 -8 l5 3 l0 -6 l5 6 l5 -3 l-5 8 Z" fill="#3fae5a"/>
+</g>
+</g></svg>
